@@ -19,12 +19,10 @@ public class Bloc extends javax.swing.JFrame {
 
     public Bloc() {
         initComponents(); 
-        boolean flaggg = false;
     }
    
     //Variables para el control de cambio 
-    Boolean openFlag = false;
-    Boolean saveFlag = false;
+    Boolean flag = false;
     String str;
     String strFinal;
     
@@ -43,6 +41,7 @@ public class Bloc extends javax.swing.JFrame {
         itemNuevo = new javax.swing.JMenuItem();
         itemAbrir = new javax.swing.JMenuItem();
         itemGuardar = new javax.swing.JMenuItem();
+        itemGuardarComo = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         itemSalir = new javax.swing.JMenuItem();
         edicion = new javax.swing.JMenu();
@@ -143,6 +142,15 @@ public class Bloc extends javax.swing.JFrame {
             }
         });
         archivo.add(itemGuardar);
+
+        itemGuardarComo.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_S, java.awt.event.InputEvent.SHIFT_MASK | java.awt.event.InputEvent.CTRL_MASK));
+        itemGuardarComo.setText("Guardar como...");
+        itemGuardarComo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemGuardarComoActionPerformed(evt);
+            }
+        });
+        archivo.add(itemGuardarComo);
         archivo.add(jSeparator3);
 
         itemSalir.setText("Salir");
@@ -414,7 +422,7 @@ public class Bloc extends javax.swing.JFrame {
     
     // formWindowClosing si es que se abrió un archivo.    
         
-    if (openFlag == true) {
+    if (flag == true) {
         
     if (!strFinal.equals(textArea.getText())) {
     
@@ -446,6 +454,10 @@ public class Bloc extends javax.swing.JFrame {
     }
     
     }//GEN-LAST:event_ajusteLineaActionPerformed
+
+    private void itemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarComoActionPerformed
+    guardarcomo();
+    }//GEN-LAST:event_itemGuardarComoActionPerformed
     
     public void closedialog() {
         
@@ -483,7 +495,7 @@ public class Bloc extends javax.swing.JFrame {
                     textArea.append(str +"\n");
                     
                     // Variables para el control de cambio
-                    openFlag = true;
+                    flag = true;
                     strFinal = textArea.getText();
 		}
 		        
@@ -503,7 +515,34 @@ public class Bloc extends javax.swing.JFrame {
 	    }
         
     }
+    
     public void guardar(){
+        
+        JFileChooser fileChooser = new JFileChooser();
+        
+        int guardar = fileChooser.showSaveDialog(textArea);
+        if (guardar == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
+            if (file == null) {
+                return;
+            }
+            if (!file.getName().toLowerCase().endsWith(".txt")) {
+                file = new File(file.getParentFile(), file.getName() + ".txt");
+            }
+            try {
+                textArea.write(new OutputStreamWriter(new FileOutputStream(file),
+                    "utf-8"));
+                
+                System.exit(0);
+                
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        }
+        
+    }
+    
+    public void guardarcomo(){
         
         JFileChooser fileChooser = new JFileChooser();
         
@@ -584,6 +623,7 @@ public class Bloc extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemAcercaDe;
     public static javax.swing.JMenuItem itemFont;
     private javax.swing.JMenuItem itemGuardar;
+    private javax.swing.JMenuItem itemGuardarComo;
     private javax.swing.JMenuItem itemNuevo;
     private javax.swing.JMenuItem itemSalir;
     private javax.swing.JCheckBoxMenuItem itemStatusBar;
