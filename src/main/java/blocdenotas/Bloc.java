@@ -1,12 +1,15 @@
 package blocdenotas;
 
+import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
@@ -15,54 +18,17 @@ import javax.swing.text.BadLocationException;
 public class Bloc extends javax.swing.JFrame {
 
     public Bloc() {
-        initComponents();
-        
-     
-        System.out.println("      __                                                      \n" +
-"     /  l                                                     \n" +
-"   .'   :               __.....__..._  ____                   \n" +
-"  /  /   \\          _.-\"        \"-.  \"\"    \"-.                \n" +
-" (`-: .---:    .--.'          _....J.         \"-.             \n" +
-"  \"\"\"y     \\,.'    \\  __..--\"\"       `+\"\"--.     `.           \n" +
-"    :     .'/    .-\"\"\"-. _.            `.   \"-.    `._.._     \n" +
-"    ;  _.'.'  .-j       `.               \\     \"-.   \"-._`.   \n" +
-"    :    / .-\" :          \\  `-.          `-      \"-.      \\  \n" +
-"     ;  /.'    ;          :;               .\"        \\      `,\n" +
-"     :_:/      ::\\        ;:     (        /   .-\"   .')      ;\n" +
-"       ;-\"      ; \"-.    /  ;           .^. .'    .' /    .-\" \n" +
-"      /     .-  :    `. '.  : .- / __.-j.'.'   .-\"  /.---'    \n" +
-"     /  /      `,\\.  .'   \"\":'  /-\"   .'       \\__.'          \n" +
-"    :  :         ,\\\"\"       ; .'    .'      .-\"\"              \n" +
-"   _J  ;         ; `.      /.'    _/    \\.-\"                  \n" +
-"  /  \"-:        /\"--.b-..-'     .'       ;                    \n" +
-" /     /  \"\"-..'            .--'.-'/  ,  :                    \n" +
-":`.   :     / : bug         `-i\" ,',_:  _ \\                   \n" +
-":  \\  '._  :__;             .'.-\"; ; ; j `.l                  \n" +
-" \\  \\          \"-._         `\"  :_/ :_/                       \n" +
-"  `.;\\             \"-._                                       \n" +
-"    :_\"-._             \"-.                                    \n" +
-"      `.  l \"-.     )     `.                                  \n" +
-"        \"\"^--\"\"^-. :        \\                                 \n" +
-"                  \";         \\                                \n" +
-"                  :           `._                             \n" +
-"                  ; /    \\ `._   \"\"---.                       \n" +
-"                 / /   _      `.--.__.'                       \n" +
-"                : :   / ;  :\".  \\                             \n" +
-"                ; ;  :  :  ;  `. `.                           \n" +
-"               /  ;  :   ; :    `. `.                         \n" +
-"              /  /:  ;   :  ;     \"-'                         \n" +
-"             :_.' ;  ;    ; :                                 \n" +
-"                 /  /     :_l                                 \n" +
-"                 `-'                                          \n" +
-"\n" +
-"  ");    
-   
-    
-        
-        
+        initComponents(); 
+        boolean flaggg = false;
     }
    
-
+    //Variables para el control de cambio 
+    Boolean openFlag = false;
+    Boolean saveFlag = false;
+    String str;
+    String strFinal;
+    
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -319,7 +285,7 @@ public class Bloc extends javax.swing.JFrame {
 
     private void acercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaDeActionPerformed
    
-    //Crea un nuevo objeto de clase AcercaDe, lo posiciona en el medio y 
+    //Crea un nuevo objeto de clase AcercaDe, lo posiciona en el medio y
     //lo hace visible.
     
     AcercaDe cartelito = new AcercaDe(this,false);
@@ -337,6 +303,7 @@ public class Bloc extends javax.swing.JFrame {
     SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy ");
     //Setea el área de texto con todo el contenido que tenia antes y le suma el 
     //String de la fecha y hora.
+    textArea.replaceSelection("");
     textArea.setText(textArea.getText()+ formatter.format(date));
         
     }//GEN-LAST:event_horaActionPerformed
@@ -386,7 +353,6 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_itemFontActionPerformed
 
     private void position(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_position
-    
 
     //Activador de copiar y pegar
      
@@ -434,28 +400,9 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_itemGuardarActionPerformed
 
     private void itemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAbrirActionPerformed
- 
-        Scanner entrada = null;
-        JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(fileChooser);
-        try {
-            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-            File f = new File(ruta);
-            entrada = new Scanner(f);
-            while (entrada.hasNext()) {
-                textArea.append(entrada.nextLine() +"\n");
-            }
-        }catch (FileNotFoundException e){
-            System.out.println(e.getMessage());
-        }catch (NullPointerException e){
-            System.out.println("No se ha seleccionado ningún fichero");
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }finally{
-            if (entrada != null){
-                entrada.close();
-            }
-        }
+        
+        abrir();
+	
     }//GEN-LAST:event_itemAbrirActionPerformed
 
     private void itemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNuevoActionPerformed
@@ -464,26 +411,32 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_itemNuevoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    //Si el textArea no esta vacío pregunta si desea guardar. Si esta vacío se cierra.
-    if (!"".equals(textArea.getText())){
-        //Abre JOptionPane 
-    int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
-    "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
-    //Opción Sí, Abre el menú para guardar.
-    if ( valor == JOptionPane.YES_OPTION) { 
-    guardar();
-    }
-    //Opción No, cierra el programa.
-    if ( valor == JOptionPane.NO_OPTION ) {
-    System.exit(0);
-    }   
-    //Si se cancela no hace nada.
+    
+    // formWindowClosing si es que se abrió un archivo.    
+        
+    if (openFlag == true) {
+        
+    if (!strFinal.equals(textArea.getText())) {
+    
+    closedialog();    
+        
+    } else System.exit(0);
+    
     } else {
-    System.exit(0);
-    }
+        
+    //formWindowClosing si NO se abrió un archivo.
+    
+    if (!"".equals(textArea.getText())){
+    
+     closedialog();   
+        
+    } else System.exit(0);    
+    
     }//GEN-LAST:event_formWindowClosing
-
+    }
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
+    
+    // Activa el ajuste de línea dependiendo si el check box esta activado.
     boolean dog;
     dog = ajusteLinea.getState();
     if (dog == true) {
@@ -493,7 +446,63 @@ public class Bloc extends javax.swing.JFrame {
     }
     
     }//GEN-LAST:event_ajusteLineaActionPerformed
-
+    
+    public void closedialog() {
+        
+    //Abre JOptionPane. 
+    int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
+    "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
+    //Opción Sí.
+    if ( valor == JOptionPane.YES_OPTION) { 
+    guardar();
+    }
+    //Opción No.
+    if ( valor == JOptionPane.NO_OPTION ) {
+    System.exit(0);
+    }   
+    
+        
+    }
+    
+    public void abrir() {
+        
+        // Abre el FileChooser
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.showOpenDialog(fileChooser);
+        
+        //Selecciona y lee el archivo.
+        try {
+            textArea.setText("");
+            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            File fileDir = new File(ruta);
+            BufferedReader in = new BufferedReader(
+		   new InputStreamReader(
+                      new FileInputStream(fileDir), "UTF8"));
+		    
+		while ((str = in.readLine()) != null) {
+                    textArea.append(str +"\n");
+                    
+                    // Variables para el control de cambio
+                    openFlag = true;
+                    strFinal = textArea.getText();
+		}
+		        
+                in.close();
+	    } 
+	    catch (UnsupportedEncodingException e) 
+	    {
+			System.out.println(e.getMessage());
+	    } 
+	    catch (IOException e) 
+	    {
+			System.out.println(e.getMessage());
+	    }
+	    catch (Exception e)
+	    {
+			System.out.println(e.getMessage());
+	    }
+        
+    }
     public void guardar(){
         
         JFileChooser fileChooser = new JFileChooser();
@@ -510,6 +519,9 @@ public class Bloc extends javax.swing.JFrame {
             try {
                 textArea.write(new OutputStreamWriter(new FileOutputStream(file),
                     "utf-8"));
+                
+                strFinal = textArea.getText();
+                
         } catch (Exception e) {
             e.printStackTrace();
         }

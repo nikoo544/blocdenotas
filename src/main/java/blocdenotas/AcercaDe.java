@@ -56,7 +56,7 @@ public class AcercaDe extends javax.swing.JDialog {
 
         jLabel3.setText("Usuario:");
 
-        jLabel4.setText("IP: ");
+        jLabel4.setText(" Equipo:");
 
         user.setText("user");
         InetAddress localHost = null;
@@ -66,8 +66,9 @@ public class AcercaDe extends javax.swing.JDialog {
             Logger.getLogger(AcercaDe.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        user.setText(localHost.getHostName());
-        ipuser.setText(localHost.getHostAddress());
+        // user.setText(localHost.getHostName());
+        user.setText(System.getenv("USERNAME"));
+        ipuser.setText(localHost.getHostName());
 
         ipuser.setText("ipuser");
         ipuser.setText(localHost.getHostAddress());
@@ -90,7 +91,7 @@ public class AcercaDe extends javax.swing.JDialog {
                         .addGap(49, 49, 49)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
+                        .addGap(44, 44, 44)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
@@ -111,12 +112,12 @@ public class AcercaDe extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addGap(41, 41, 41)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(user))
+                    .addComponent(user)
+                    .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(ipuser))
+                    .addComponent(ipuser)
+                    .addComponent(jLabel4))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 

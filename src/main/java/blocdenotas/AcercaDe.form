@@ -56,7 +56,7 @@
                           <Component id="jSeparator1" min="-2" pref="307" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" pref="52" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -83,13 +83,13 @@
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="user" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel3" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="ipuser" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="60" max="32767" attributes="0"/>
               </Group>
@@ -120,7 +120,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="IP: "/>
+            <Property name="text" type="java.lang.String" value=" Equipo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="user">
@@ -128,7 +128,7 @@
             <Property name="text" type="java.lang.String" value="user"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="InetAddress localHost = null;&#xa;        try {&#xa;            localHost = InetAddress.getLocalHost();&#xa;        } catch (UnknownHostException ex) {&#xa;            Logger.getLogger(AcercaDe.class.getName()).log(Level.SEVERE, null, ex);&#xa;        }&#xa;        &#xa;            user.setText(localHost.getHostName());&#xa;            ipuser.setText(localHost.getHostAddress());"/>
+            <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="InetAddress localHost = null;&#xa;        try {&#xa;            localHost = InetAddress.getLocalHost();&#xa;        } catch (UnknownHostException ex) {&#xa;            Logger.getLogger(AcercaDe.class.getName()).log(Level.SEVERE, null, ex);&#xa;        }&#xa;        &#xa;           // user.setText(localHost.getHostName());&#xa;            user.setText(System.getenv(&quot;USERNAME&quot;));&#xa;            ipuser.setText(localHost.getHostName());"/>
           </AuxValues>
         </Component>
         <Component class="javax.swing.JLabel" name="ipuser">
