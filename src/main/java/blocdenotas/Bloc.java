@@ -14,18 +14,20 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
-
 public class Bloc extends javax.swing.JFrame {
-
+    
+    
     public Bloc() {
-        initComponents(); 
+        initComponents();
+        strFinal = textArea.getText();
     }
    
     //Variables para el control de cambio 
     Boolean flag = false;
     String str;
     String strFinal;
-    
+    String ruta;
+    String title = "Nuevo archivo.txt : Bloc de notas";
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -63,7 +65,7 @@ public class Bloc extends javax.swing.JFrame {
         itemAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setTitle("Bloc de notas");
+        setTitle(title);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setIconImages(null);
         setLocation(new java.awt.Point(500, 250));
@@ -286,240 +288,301 @@ public class Bloc extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
-    
-    //Corta    
-    textArea.cut();
+        //Corta    
+        textArea.cut();
     }//GEN-LAST:event_cortarActionPerformed
 
     private void acercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaDeActionPerformed
-   
-    //Crea un nuevo objeto de clase AcercaDe, lo posiciona en el medio y
-    //lo hace visible.
-    
-    AcercaDe cartelito = new AcercaDe(this,false);
-    cartelito.setLocationRelativeTo(null); 
-    cartelito.setVisible(true);
-      
-   
+
+        //Crea un nuevo objeto de clase AcercaDe, lo posiciona en el medio y
+        //lo hace visible.
+        AcercaDe cartelito = new AcercaDe(this, false);
+        cartelito.setLocationRelativeTo(null);
+        cartelito.setVisible(true);
+
+
     }//GEN-LAST:event_acercaDeActionPerformed
 
     private void horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaActionPerformed
-    
-    //Declara una variable de tipo Date    
-    Date date = new Date();
-    //Declara una variable de tipo SimpleDateFormat y se le pasa el formato.
-    SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy ");
-    //Setea el área de texto con todo el contenido que tenia antes y le suma el 
-    //String de la fecha y hora.
-    textArea.replaceSelection("");
-    textArea.setText(textArea.getText()+ formatter.format(date));
-        
+
+        //Declara una variable de tipo Date    
+        Date date = new Date();
+        //Declara una variable de tipo SimpleDateFormat y se le pasa el formato.
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy ");
+        //Setea el área de texto con todo el contenido que tenia antes y le suma el 
+        //String de la fecha y hora.
+        textArea.replaceSelection("");
+        textArea.setText(textArea.getText() + formatter.format(date));
+
     }//GEN-LAST:event_horaActionPerformed
-    
 
     private void copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiarActionPerformed
-    //Copia
-    textArea.copy();
-    
+        //Copia
+        textArea.copy();
+
     }//GEN-LAST:event_copiarActionPerformed
 
     private void itemStatusBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemStatusBarActionPerformed
-    
+
 // Se declara una variable booleana para que tome el estado del checkbox.
-    boolean dog;
+        boolean dog;
         dog = itemStatusBar.getState();
-    
-    //Si el checkbox devuelve "falso" la barra inferior se esconde.  
-    if (dog == true) {
-        
-    barrita.setVisible(true);
-    } 
-    //Si no , la barra aparece.
-    else {
-     barrita.setVisible(false);      
-            }
-    
+
+        //Si el checkbox devuelve "falso" la barra inferior se esconde.  
+        if (dog == true) {
+
+            barrita.setVisible(true);
+        } //Si no , la barra aparece.
+        else {
+            barrita.setVisible(false);
+        }
+
     }//GEN-LAST:event_itemStatusBarActionPerformed
 
     private void pegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pegarActionPerformed
-    //Pega
-    textArea.paste();
+        //Pega
+        textArea.paste();
     }//GEN-LAST:event_pegarActionPerformed
 
     private void selectallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectallActionPerformed
-    //Selecciona todo
-    textArea.selectAll();
+        //Selecciona todo
+        textArea.selectAll();
     }//GEN-LAST:event_selectallActionPerformed
 
     private void itemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFontActionPerformed
-    //Crea un objeto de clase Fonts.     
-    Fuente fontchooser = new Fuente(this,true);
-    //Posiciona la ventana en el centro de la pantalla.
-    fontchooser.setLocationRelativeTo(null); 
-    //Lo hace visible.
-    fontchooser.setVisible(true);
+        //Crea un objeto de clase Fonts.     
+        Fuente fontchooser = new Fuente(this, true);
+        //Posiciona la ventana en el centro de la pantalla.
+        fontchooser.setLocationRelativeTo(null);
+        //Lo hace visible.
+        fontchooser.setVisible(true);
     }//GEN-LAST:event_itemFontActionPerformed
 
     private void position(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_position
 
-    //Activador de copiar y pegar
-     
-    if (textArea.getSelectedText()==null) {
-    copiar.setEnabled(false);
-    cortar.setEnabled(false);
-    eliminar.setEnabled(false);
-    }else{
-    copiar.setEnabled(true);
-    cortar.setEnabled(true);
-    eliminar.setEnabled(true);
-    }   
-    
-    // Barra de estado 
-    
-    int linea = 1;
-    int columna = 1;
-        
-        
+        //Activador de copiar y pegar
+        if (textArea.getSelectedText() == null) {
+            copiar.setEnabled(false);
+            cortar.setEnabled(false);
+            eliminar.setEnabled(false);
+        } else {
+            copiar.setEnabled(true);
+            cortar.setEnabled(true);
+            eliminar.setEnabled(true);
+        }
+
+        // Barra de estado 
+        int linea = 1;
+        int columna = 1;
+
         try {
             int col = textArea.getCaretPosition();
             linea = textArea.getLineOfOffset(col);
             columna = col - textArea.getLineStartOffset(linea);
-            
-            linea ++;
-            columna ++;
-            
+
+            linea++;
+            columna++;
+
         } catch (BadLocationException ex) {
-            
+
         }
         currentposition.setText("Línea " + linea + " , Columna " + columna);
+        
+        //Listener de modificación de archivo.
+        if (!strFinal.equals(textArea.getText())) {
+            setTitle("*"+title);
+          
+        }
+        
+
     }//GEN-LAST:event_position
 
     private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-    textArea.replaceSelection("");
+        //Reemplaza el texto seleccionado con un string nulo.
+        textArea.replaceSelection(null);
     }//GEN-LAST:event_eliminarActionPerformed
 
     private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalirActionPerformed
-    //Cierra el programa.
-    System.exit(0);
+        //Cierra el programa.
+        System.exit(0);
     }//GEN-LAST:event_itemSalirActionPerformed
 
     private void itemGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarActionPerformed
-    guardar();
+        //Si el archivo no tiene un path, lo crea. 
+        if (ruta == null) {
+            guardarcomo();
+        } else {
+            save();
+        }
     }//GEN-LAST:event_itemGuardarActionPerformed
 
     private void itemAbrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAbrirActionPerformed
-        
-        abrir();
-	
+
+        //Si se modificó el archivo pregunta si guardar.
+        if (strFinal.equals(textArea.getText())) {
+            abrir();
+        } else {
+            opendialog();
+        }
+
     }//GEN-LAST:event_itemAbrirActionPerformed
 
     private void itemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNuevoActionPerformed
         // Setea el área de texto con un String vacio.
-        textArea.setText("");
+        if (strFinal.equals(textArea.getText())) {
+            textArea.setText("");
+            setter();
+        } else { //Si hay un cambio en el archivo pregunta si desea guardar.
+            newdialog();
+            if (strFinal.equals(textArea.getText())) {
+                textArea.setText("");
+                setter();
+                //Actualiza el título
+                title = "Nuevo archivo.txt : Bloc de notas";
+                setTitle(title);
+            }
+        }
     }//GEN-LAST:event_itemNuevoActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    
-    // formWindowClosing si es que se abrió un archivo.    
-        
-    if (flag == true) {
-        
-    if (!strFinal.equals(textArea.getText())) {
-    
-    closedialog();    
-        
-    } else System.exit(0);
-    
-    } else {
-        
-    //formWindowClosing si NO se abrió un archivo.
-    
-    if (!"".equals(textArea.getText())){
-    
-     closedialog();   
-        
-    } else System.exit(0);    
-    
+
+        // formWindowClosing si es que se abrió un archivo.    
+        if (flag == true) {
+
+            if (!strFinal.equals(textArea.getText())) {
+
+                closedialog();
+
+            } else {
+                System.exit(0);
+            }
+
+        } else {
+
+            //formWindowClosing si NO se abrió un archivo.
+            if (!"".equals(textArea.getText())) {
+
+                closedialog();
+
+            } else {
+                System.exit(0);
+            }
+
     }//GEN-LAST:event_formWindowClosing
     }
+    
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
-    
-    // Activa el ajuste de línea dependiendo si el check box esta activado.
-    boolean dog;
-    dog = ajusteLinea.getState();
-    if (dog == true) {
-    textArea.setLineWrap(true);   
-    } else {
-    textArea.setLineWrap(false);  
-    }
-    
+// Activa el ajuste de línea dependiendo si el check box esta activado.
+        boolean dog;
+        dog = ajusteLinea.getState();
+        if (dog == true) {
+            textArea.setLineWrap(true);
+        } else {
+            textArea.setLineWrap(false);
+        }
+
     }//GEN-LAST:event_ajusteLineaActionPerformed
 
     private void itemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarComoActionPerformed
     guardarcomo();
     }//GEN-LAST:event_itemGuardarComoActionPerformed
-    
+
+    //Ventana al cerrar.
     public void closedialog() {
-        
-    //Abre JOptionPane. 
-    int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
-    "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
-    //Opción Sí.
-    if ( valor == JOptionPane.YES_OPTION) { 
-    guardar();
+        //Abre JOptionPane. 
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
+                "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
+        //Opción Sí.
+        if (valor == JOptionPane.YES_OPTION) {
+            guardar();
+        }
+        //Opción No.
+        if (valor == JOptionPane.NO_OPTION) {
+            System.exit(0);
+        }
     }
-    //Opción No.
-    if ( valor == JOptionPane.NO_OPTION ) {
-    System.exit(0);
-    }   
-    
-        
+
+    //Ventana nuevo.
+    public void newdialog() {
+
+        //Abre JOptionPane. 
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
+                "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
+        //Opción Sí.
+        if (valor == JOptionPane.YES_OPTION) {
+            guardarcomo();
+        }
+        //Opción No.
+        if (valor == JOptionPane.NO_OPTION) {
+            textArea.setText(null);
+            
+            //Actualiza el título
+            title = "Nuevo archivo.txt : Bloc de notas";
+            setTitle(title);
+        }
     }
-    
+
+    //Ventana al abrir.
+    public void opendialog() {
+
+        //Abre JOptionPane. 
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
+                "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
+        //Opción Sí.
+        if (valor == JOptionPane.YES_OPTION) {
+            guardarcomo();
+
+            // Si se guardo el archivo ejecuta abrir().
+            if (strFinal.equals(textArea.getText())) {
+                abrir();
+            }
+        }
+        //Opción No.
+        if (valor == JOptionPane.NO_OPTION) {
+            abrir();
+        }
+    }
+
     public void abrir() {
-        
+
         // Abre el FileChooser
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.showOpenDialog(fileChooser);
-        
+
         //Selecciona y lee el archivo.
         try {
-            textArea.setText("");
-            String ruta = fileChooser.getSelectedFile().getAbsolutePath();
-            File fileDir = new File(ruta);
-            BufferedReader in = new BufferedReader(
-		   new InputStreamReader(
-                      new FileInputStream(fileDir), "UTF8"));
-		    
-		while ((str = in.readLine()) != null) {
-                    textArea.append(str +"\n");
-                    
+            ruta = fileChooser.getSelectedFile().getAbsolutePath();
+            File file = new File(ruta);
+            try (BufferedReader in = new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(file), "UTF8"))) {
+                textArea.setText("");
+                while ((str = in.readLine()) != null) {
+                    textArea.append(str + "\n");
+
                     // Variables para el control de cambio
                     flag = true;
-                    strFinal = textArea.getText();
-		}
-		        
-                in.close();
-	    } 
-	    catch (UnsupportedEncodingException e) 
-	    {
-			System.out.println(e.getMessage());
-	    } 
-	    catch (IOException e) 
-	    {
-			System.out.println(e.getMessage());
-	    }
-	    catch (Exception e)
-	    {
-			System.out.println(e.getMessage());
-	    }
-        
+                    setter();
+                    //Actualiza el título
+                    title = file.getName() + " : Bloc de notas";
+                    setTitle(title);
+                }
+            }
+        } catch (UnsupportedEncodingException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
-    
-    public void guardar(){
-        
+
+    //Guardar y salir
+    public void guardar() {
+
         JFileChooser fileChooser = new JFileChooser();
-        
+
         int guardar = fileChooser.showSaveDialog(textArea);
         if (guardar == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -531,21 +594,40 @@ public class Bloc extends javax.swing.JFrame {
             }
             try {
                 textArea.write(new OutputStreamWriter(new FileOutputStream(file),
-                    "utf-8"));
-                
+                        "utf-8"));
+
                 System.exit(0);
-                
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            } catch (IOException e) {
+            }
         }
-        }
-        
+
     }
-    
-    public void guardarcomo(){
-        
+
+    //Guardar y sobreescribir el archivo que ya esta abierto.
+    public void save() {
+
+        File file = new File(ruta);
+
+        try {
+            textArea.write(new OutputStreamWriter(new FileOutputStream(file),
+                    "utf-8"));
+            setter();
+            //Actualiza el título
+            title = file.getName() + " : Bloc de notas";
+            setTitle(title);
+
+        } catch (IOException e) {
+
+        }
+
+    }
+
+    //Guardar como.
+    public void guardarcomo() {
+
         JFileChooser fileChooser = new JFileChooser();
-        
+
         int guardar = fileChooser.showSaveDialog(textArea);
         if (guardar == JFileChooser.APPROVE_OPTION) {
             File file = fileChooser.getSelectedFile();
@@ -557,20 +639,27 @@ public class Bloc extends javax.swing.JFrame {
             }
             try {
                 textArea.write(new OutputStreamWriter(new FileOutputStream(file),
-                    "utf-8"));
-                
-                strFinal = textArea.getText();
-                
-        } catch (Exception e) {
-            e.printStackTrace();
+                        "utf-8"));
+
+                ruta = file.getAbsolutePath();
+                setter();
+                //Actualiza el título
+                title = file.getName() + " : Bloc de notas";
+                setTitle(title);
+
+            } catch (IOException e) {
+            }
         }
-        }
-        
+
     }
-    
-    
+
+    //Adquiere la ultima modificación en el area de texto.
+    public void setter() {
+        strFinal = textArea.getText();
+    }
+
     public static void main(String args[]) {
-        
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -583,28 +672,24 @@ public class Bloc extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Bloc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Bloc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Bloc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Bloc.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-          
+
                 new Bloc().setVisible(true);
-                
+
             }
         });
     }
-      
- //Inicializa todos los elementos del menu  
+
+    //Inicializa todos los elementos del menu  
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem ajusteLinea;
     private javax.swing.JMenu archivo;
