@@ -10,26 +10,25 @@ import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
 public class Bloc extends javax.swing.JFrame {
-
+    
+    
     public Bloc() {
         initComponents();
         strFinal = textArea.getText();
     }
-
+   
     //Variables para el control de cambio 
     Boolean flag = false;
     String str;
     String strFinal;
     String ruta;
     String title = "Nuevo archivo.txt : Bloc de notas";
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -38,10 +37,7 @@ public class Bloc extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         barrita = new javax.swing.JToolBar();
-        output = new javax.swing.JLabel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(5000, 32767));
         currentposition = new javax.swing.JLabel();
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
         barraMenu = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
         itemNuevo = new javax.swing.JMenuItem();
@@ -64,10 +60,8 @@ public class Bloc extends javax.swing.JFrame {
         ajusteLinea = new javax.swing.JCheckBoxMenuItem();
         itemFont = new javax.swing.JMenuItem();
         ver = new javax.swing.JMenu();
-        itemAlwaysOnTop = new javax.swing.JCheckBoxMenuItem();
         itemStatusBar = new javax.swing.JCheckBoxMenuItem();
         ayuda = new javax.swing.JMenu();
-        webproject = new javax.swing.JMenuItem();
         itemAcercaDe = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -82,13 +76,10 @@ public class Bloc extends javax.swing.JFrame {
         });
         getContentPane().setLayout(new java.awt.CardLayout());
 
-        jScrollPane3.setBorder(null);
-
         textArea.setColumns(20);
         textArea.setFont(new java.awt.Font("Arial", 0, 26)); // NOI18N
         textArea.setLineWrap(true);
         textArea.setRows(5);
-        textArea.setBorder(null);
         textArea.setDragEnabled(true);
         textArea.addCaretListener(new javax.swing.event.CaretListener() {
             public void caretUpdate(javax.swing.event.CaretEvent evt) {
@@ -98,17 +89,13 @@ public class Bloc extends javax.swing.JFrame {
         jScrollPane3.setViewportView(textArea);
 
         barrita.setBackground(new java.awt.Color(231, 231, 231));
-        barrita.setBorder(null);
         barrita.setFloatable(false);
         barrita.setToolTipText("");
         barrita.setBorderPainted(false);
         barrita.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        barrita.add(output);
-        barrita.add(filler1);
 
         currentposition.setText("Línea 1 , Columna 1");
         barrita.add(currentposition);
-        barrita.add(filler2);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,15 +107,13 @@ public class Bloc extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE)
                 .addGap(0, 0, 0)
                 .addComponent(barrita, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         getContentPane().add(jPanel1, "card2");
 
-        barraMenu.setBackground(new java.awt.Color(255, 255, 255));
-        barraMenu.setBorder(null);
         barraMenu.setBorderPainted(false);
 
         archivo.setText("Archivo");
@@ -272,14 +257,6 @@ public class Bloc extends javax.swing.JFrame {
 
         ver.setText("Ver");
 
-        itemAlwaysOnTop.setText("Siempre visible");
-        itemAlwaysOnTop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemAlwaysOnTopActionPerformed(evt);
-            }
-        });
-        ver.add(itemAlwaysOnTop);
-
         itemStatusBar.setSelected(true);
         itemStatusBar.setText("Barra de estado");
         itemStatusBar.addActionListener(new java.awt.event.ActionListener() {
@@ -293,15 +270,6 @@ public class Bloc extends javax.swing.JFrame {
 
         ayuda.setText("Ayuda");
 
-        webproject.setText("Página del Proyecto");
-        webproject.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                webprojectActionPerformed(evt);
-            }
-        });
-        ayuda.add(webproject);
-
-        itemAcercaDe.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, 0));
         itemAcercaDe.setText("Acerca del Bloc de Notas");
         itemAcercaDe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -419,12 +387,13 @@ public class Bloc extends javax.swing.JFrame {
 
         }
         currentposition.setText("Línea " + linea + " , Columna " + columna);
-
+        
         //Listener de modificación de archivo.
         if (!strFinal.equals(textArea.getText())) {
-            setTitle("*" + title);
+            setTitle("*"+title);
+          
         }
-
+        
 
     }//GEN-LAST:event_position
 
@@ -501,7 +470,7 @@ public class Bloc extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formWindowClosing
     }
-
+    
     private void ajusteLineaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ajusteLineaActionPerformed
 // Activa el ajuste de línea dependiendo si el check box esta activado.
         boolean dog;
@@ -515,33 +484,13 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_ajusteLineaActionPerformed
 
     private void itemGuardarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemGuardarComoActionPerformed
-        guardarcomo();
+    guardarcomo();
     }//GEN-LAST:event_itemGuardarComoActionPerformed
-
-    private void webprojectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webprojectActionPerformed
-        String url = "https://github.com/nikoo544/blocdenotas";
-        try {
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
-        } catch (IOException ex) {
-            Logger.getLogger(Bloc.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_webprojectActionPerformed
-
-    private void itemAlwaysOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlwaysOnTopActionPerformed
-        // Activa el ajuste de línea dependiendo si el check box esta activado.
-        boolean dog;
-        dog = itemAlwaysOnTop.getState();
-        if (dog == true) {
-            setAlwaysOnTop(true);
-        } else {
-            setAlwaysOnTop(false);
-        }
-    }//GEN-LAST:event_itemAlwaysOnTopActionPerformed
 
     //Ventana al cerrar.
     public void closedialog() {
         //Abre JOptionPane. 
-        int valor = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?",
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
@@ -557,7 +506,7 @@ public class Bloc extends javax.swing.JFrame {
     public void newdialog() {
 
         //Abre JOptionPane. 
-        int valor = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?",
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
@@ -566,7 +515,7 @@ public class Bloc extends javax.swing.JFrame {
         //Opción No.
         if (valor == JOptionPane.NO_OPTION) {
             textArea.setText(null);
-
+            
             //Actualiza el título
             title = "Nuevo archivo.txt : Bloc de notas";
             setTitle(title);
@@ -577,7 +526,7 @@ public class Bloc extends javax.swing.JFrame {
     public void opendialog() {
 
         //Abre JOptionPane. 
-        int valor = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?",
+        int valor = JOptionPane.showConfirmDialog(null, "¿Desea guardar los cambios?",
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
@@ -598,7 +547,7 @@ public class Bloc extends javax.swing.JFrame {
 
         // Abre el FileChooser
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.showOpenDialog(this);
+        fileChooser.showOpenDialog(fileChooser);
 
         //Selecciona y lee el archivo.
         try {
@@ -753,13 +702,10 @@ public class Bloc extends javax.swing.JFrame {
     private javax.swing.JMenuItem deshacer;
     private javax.swing.JMenu edicion;
     private javax.swing.JMenuItem eliminar;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
     private javax.swing.JMenu formato;
     private javax.swing.JMenuItem horayfecha;
     private javax.swing.JMenuItem itemAbrir;
     private javax.swing.JMenuItem itemAcercaDe;
-    private javax.swing.JCheckBoxMenuItem itemAlwaysOnTop;
     public static javax.swing.JMenuItem itemFont;
     private javax.swing.JMenuItem itemGuardar;
     private javax.swing.JMenuItem itemGuardarComo;
@@ -771,12 +717,10 @@ public class Bloc extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JLabel output;
     private javax.swing.JMenuItem pegar;
     private javax.swing.JMenuItem selectall;
     public static javax.swing.JTextArea textArea;
     private javax.swing.JMenu ver;
-    private javax.swing.JMenuItem webproject;
     // End of variables declaration//GEN-END:variables
 
 }
