@@ -12,7 +12,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
@@ -22,7 +21,6 @@ public class Bloc extends javax.swing.JFrame {
     public Bloc() throws IOException {
         initComponents();
         strFinal = textArea.getText();
-        setIconImage(ImageIO.read(new File("res/icon.png")));
     }
 
     //Variables para el control de cambio 
