@@ -73,6 +73,7 @@ public class Fuente extends javax.swing.JDialog {
         labelSizeFont = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Fuente");
         setIconImage(null);
         setIconImages(null);
 

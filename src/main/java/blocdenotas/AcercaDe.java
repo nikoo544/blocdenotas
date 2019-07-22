@@ -35,6 +35,9 @@ public class AcercaDe extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Acerca de Bloc de notas");
+        setIconImage(null);
+        setIconImages(null);
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Franklin Gothic Medium", 1, 48)); // NOI18N
