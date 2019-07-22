@@ -471,6 +471,7 @@ public class Bloc extends javax.swing.JFrame {
                 //Actualiza el título
                 title = "Nuevo archivo.txt : Bloc de notas";
                 setTitle(title);
+                ruta = null;
             }
         }
     }//GEN-LAST:event_itemNuevoActionPerformed
