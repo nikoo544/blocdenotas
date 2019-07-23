@@ -392,7 +392,7 @@ public class Bloc extends javax.swing.JFrame {
 
     private void position(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_position
 
-        //Activador de copiar y pegar
+        //Activador de copiar, cortar y eliminar
         if (textArea.getSelectedText() == null) {
             copiar.setEnabled(false);
             cortar.setEnabled(false);
@@ -520,6 +520,7 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_itemGuardarComoActionPerformed
 
     private void webprojectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_webprojectActionPerformed
+        //Abre en el navegador el string url.
         String url = "https://github.com/nikoo544/blocdenotas";
         try {
             Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + url);
@@ -529,7 +530,7 @@ public class Bloc extends javax.swing.JFrame {
     }//GEN-LAST:event_webprojectActionPerformed
 
     private void itemAlwaysOnTopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAlwaysOnTopActionPerformed
-        // Activa el ajuste de línea dependiendo si el check box esta activado.
+        // Activa el Siempre visible, dependiendo si el check box esta activado.
         boolean dog;
         dog = itemAlwaysOnTop.getState();
         if (dog == true) {
@@ -595,6 +596,7 @@ public class Bloc extends javax.swing.JFrame {
         }
     }
 
+    //Accion de abrir.
     public void abrir() {
 
         // Abre el FileChooser
@@ -656,7 +658,7 @@ public class Bloc extends javax.swing.JFrame {
 
     }
 
-    //Guardar y sobreescribir el archivo que ya esta abierto.
+    //Guardar sobreescribiendo el archivo que ya esta abierto.
     public void save() {
 
         File file = new File(ruta);
@@ -745,7 +747,7 @@ public class Bloc extends javax.swing.JFrame {
         });
     }
 
-    //Inicializa todos los elementos del menu  
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem ajusteLinea;
     private javax.swing.JMenu archivo;
