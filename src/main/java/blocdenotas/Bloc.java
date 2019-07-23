@@ -463,6 +463,10 @@ public class Bloc extends javax.swing.JFrame {
         if (strFinal.equals(textArea.getText())) {
             textArea.setText("");
             setter();
+             //Actualiza el título
+                title = "Nuevo archivo.txt : Bloc de notas";
+                setTitle(title);
+                ruta = null;
         } else { //Si hay un cambio en el archivo pregunta si desea guardar.
             newdialog();
             if (strFinal.equals(textArea.getText())) {
@@ -568,7 +572,7 @@ public class Bloc extends javax.swing.JFrame {
         //Opción No.
         if (valor == JOptionPane.NO_OPTION) {
             textArea.setText(null);
-
+            setter();
             //Actualiza el título
             title = "Nuevo archivo.txt : Bloc de notas";
             setTitle(title);
