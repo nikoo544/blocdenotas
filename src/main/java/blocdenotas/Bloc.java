@@ -40,7 +40,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
         jScrollPane3 = new javax.swing.JScrollPane();
         textArea = new javax.swing.JTextArea();
         barrita = new javax.swing.JToolBar();
-        output = new javax.swing.JLabel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(5000, 32767));
         currentposition = new javax.swing.JLabel();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 0), new java.awt.Dimension(5, 32767));
@@ -53,7 +52,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         itemSalir = new javax.swing.JMenuItem();
         edicion = new javax.swing.JMenu();
-        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         copiar = new javax.swing.JMenuItem();
         cortar = new javax.swing.JMenuItem();
         pegar = new javax.swing.JMenuItem();
@@ -104,7 +102,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
         barrita.setToolTipText("");
         barrita.setBorderPainted(false);
         barrita.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        barrita.add(output);
         barrita.add(filler1);
 
         currentposition.setText("Línea 1 , Columna 1");
@@ -182,7 +179,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
         barraMenu.add(archivo);
 
         edicion.setText("Edición");
-        edicion.add(jSeparator1);
 
         copiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
         copiar.setText("Copiar");
@@ -543,7 +539,13 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
-            guardar();
+           //Si el archivo dispone de una ruta, lo guarda directamente.
+            if (ruta == null) {
+                guardar();
+            } else {
+                save();
+                System.exit(0);
+            }
         }
         //Opción No.
         if (valor == JOptionPane.NO_OPTION) {
@@ -559,15 +561,21 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
-            guardarcomo();
-        }
-        //Opción No.
-        if (valor == JOptionPane.NO_OPTION) {
-            textArea.setText(null);
-            setter();
-            //Actualiza el título
-            title = "Nuevo archivo.txt : Bloc de notas";
-            setTitle(title);
+            //Si el archivo dispone de una ruta, lo guarda directamente.
+            if (ruta == null) {
+                guardarcomo();
+            } else {
+                save();
+            }
+
+            //Opción No.
+            if (valor == JOptionPane.NO_OPTION) {
+                textArea.setText(null);
+                setter();
+                //Actualiza el título
+                title = "Nuevo archivo.txt : Bloc de notas";
+                setTitle(title);
+            }
         }
     }
 
@@ -579,7 +587,12 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
                 "Bloc de Notas", JOptionPane.YES_NO_CANCEL_OPTION);
         //Opción Sí.
         if (valor == JOptionPane.YES_OPTION) {
-            guardarcomo();
+            //Si el archivo dispone de una ruta, lo guarda directamente.
+            if (ruta == null) {
+                guardarcomo();
+            } else {
+                save();
+            }
 
             // Si se guardo el archivo ejecuta abrir().
             if (strFinal.equals(textArea.getText())) {
@@ -605,7 +618,7 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
             File file = new File(ruta);
             try (BufferedReader in = new BufferedReader(
                     new InputStreamReader(
-                            new FileInputStream(file), "UTF8"))) {
+                            new FileInputStream(file), "utf-8"))) {
                 textArea.setText("");
                 while ((str = in.readLine()) != null) {
                     textArea.append(str + "\n");
@@ -769,10 +782,8 @@ public class Bloc extends javax.swing.JFrame implements ActionListener {
     private javax.swing.JCheckBoxMenuItem itemStatusBar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JLabel output;
     private javax.swing.JMenuItem pegar;
     private javax.swing.JMenuItem selectall;
     public static javax.swing.JTextArea textArea;
