@@ -24,7 +24,6 @@ public class Fuente extends javax.swing.JDialog {
         initComponents();
        
         //Las listas fueron cargadas en el código de creación de cada una.
-        
         //Adquiere los valores de la fuente que esta utilizando el Text Area.
         Font initFont = Bloc.textArea.getFont();
         String initName = initFont.getName();

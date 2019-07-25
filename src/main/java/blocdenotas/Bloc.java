@@ -18,8 +18,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
-
-public class Bloc extends javax.swing.JFrame implements ActionListener  {
+public class Bloc extends javax.swing.JFrame implements ActionListener {
 
     public Bloc() throws IOException {
         initComponents();
@@ -32,7 +31,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener  {
     String strFinal;
     String ruta;
     String title = "Nuevo archivo.txt : Bloc de notas";
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -325,12 +323,11 @@ public class Bloc extends javax.swing.JFrame implements ActionListener  {
         cartelito.setLocationRelativeTo(null);
         cartelito.setVisible(true);
 
-
     }//GEN-LAST:event_acercaDeActionPerformed
 
     private void itemStatusBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemStatusBarActionPerformed
 
-// Se declara una variable booleana para que tome el estado del checkbox.
+//Se declara una variable booleana para que tome el estado del checkbox.
         boolean dog;
         dog = itemStatusBar.getState();
 
@@ -389,7 +386,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener  {
             setTitle("*" + title);
         }
 
-
     }//GEN-LAST:event_position
 
     private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalirActionPerformed
@@ -418,14 +414,14 @@ public class Bloc extends javax.swing.JFrame implements ActionListener  {
     }//GEN-LAST:event_itemAbrirActionPerformed
 
     private void itemNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemNuevoActionPerformed
-        // Setea el área de texto con un String vacio.
+        // Setea el área de texto con un String vacío.
         if (strFinal.equals(textArea.getText())) {
             textArea.setText("");
             setter();
-             //Actualiza el título
-                title = "Nuevo archivo.txt : Bloc de notas";
-                setTitle(title);
-                ruta = null;
+            //Actualiza el título
+            title = "Nuevo archivo.txt : Bloc de notas";
+            setTitle(title);
+            ruta = null;
         } else { //Si hay un cambio en el archivo pregunta si desea guardar.
             newdialog();
             if (strFinal.equals(textArea.getText())) {
@@ -746,7 +742,6 @@ public class Bloc extends javax.swing.JFrame implements ActionListener  {
             }
         });
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBoxMenuItem ajusteLinea;
