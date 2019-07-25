@@ -1,5 +1,7 @@
 package blocdenotas;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,7 +18,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.text.BadLocationException;
 
-public class Bloc extends javax.swing.JFrame {
+
+public class Bloc extends javax.swing.JFrame implements ActionListener  {
 
     public Bloc() throws IOException {
         initComponents();
@@ -29,6 +32,7 @@ public class Bloc extends javax.swing.JFrame {
     String strFinal;
     String ruta;
     String title = "Nuevo archivo.txt : Bloc de notas";
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -51,7 +55,6 @@ public class Bloc extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         itemSalir = new javax.swing.JMenuItem();
         edicion = new javax.swing.JMenu();
-        deshacer = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         copiar = new javax.swing.JMenuItem();
         cortar = new javax.swing.JMenuItem();
@@ -181,11 +184,6 @@ public class Bloc extends javax.swing.JFrame {
         barraMenu.add(archivo);
 
         edicion.setText("Edición");
-
-        deshacer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_Z, java.awt.event.InputEvent.CTRL_MASK));
-        deshacer.setText("Deshacer");
-        deshacer.setEnabled(false);
-        edicion.add(deshacer);
         edicion.add(jSeparator1);
 
         copiar.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.CTRL_MASK));
@@ -319,11 +317,6 @@ public class Bloc extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
-        //Corta    
-        textArea.cut();
-    }//GEN-LAST:event_cortarActionPerformed
-
     private void acercaDeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acercaDeActionPerformed
 
         //Crea un nuevo objeto de clase AcercaDe, lo posiciona en el medio y
@@ -334,25 +327,6 @@ public class Bloc extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_acercaDeActionPerformed
-
-    private void horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaActionPerformed
-
-        //Declara una variable de tipo Date    
-        Date date = new Date();
-        //Declara una variable de tipo SimpleDateFormat y se le pasa el formato.
-        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy ");
-        //Setea el área de texto con todo el contenido que tenia antes y le suma el 
-        //String de la fecha y hora.
-        textArea.replaceSelection("");
-        textArea.setText(textArea.getText() + formatter.format(date));
-
-    }//GEN-LAST:event_horaActionPerformed
-
-    private void copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiarActionPerformed
-        //Copia
-        textArea.copy();
-
-    }//GEN-LAST:event_copiarActionPerformed
 
     private void itemStatusBarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemStatusBarActionPerformed
 
@@ -370,16 +344,6 @@ public class Bloc extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_itemStatusBarActionPerformed
-
-    private void pegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pegarActionPerformed
-        //Pega
-        textArea.paste();
-    }//GEN-LAST:event_pegarActionPerformed
-
-    private void selectallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectallActionPerformed
-        //Selecciona todo
-        textArea.selectAll();
-    }//GEN-LAST:event_selectallActionPerformed
 
     private void itemFontActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemFontActionPerformed
         //Crea un objeto de clase Fonts.     
@@ -427,11 +391,6 @@ public class Bloc extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_position
-
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        //Reemplaza el texto seleccionado con un string nulo.
-        textArea.replaceSelection(null);
-    }//GEN-LAST:event_eliminarActionPerformed
 
     private void itemSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSalirActionPerformed
         //Cierra el programa.
@@ -544,7 +503,44 @@ public class Bloc extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_itemAlwaysOnTopActionPerformed
 
-    //Ventana al cerrar.
+    private void horaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_horaActionPerformed
+
+        //Declara una variable de tipo Date
+        Date date = new Date();
+        //Declara una variable de tipo SimpleDateFormat y se le pasa el formato.
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy ");
+        //Setea el área de texto con todo el contenido que tenia antes y le suma el
+        //String de la fecha y hora.
+        textArea.replaceSelection("");
+        textArea.setText(textArea.getText() + formatter.format(date));
+    }//GEN-LAST:event_horaActionPerformed
+
+    private void selectallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectallActionPerformed
+        //Selecciona todo
+        textArea.selectAll();
+    }//GEN-LAST:event_selectallActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        //Reemplaza el texto seleccionado con un string nulo.
+        textArea.replaceSelection(null);
+    }//GEN-LAST:event_eliminarActionPerformed
+
+    private void pegarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pegarActionPerformed
+        //Pega
+        textArea.paste();
+    }//GEN-LAST:event_pegarActionPerformed
+
+    private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
+        //Corta
+        textArea.cut();
+    }//GEN-LAST:event_cortarActionPerformed
+
+    private void copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiarActionPerformed
+        //Copia
+        textArea.copy();
+    }//GEN-LAST:event_copiarActionPerformed
+
+    //Ventana al cerrar.    
     public void closedialog() {
         //Abre JOptionPane. 
         int valor = JOptionPane.showConfirmDialog(this, "¿Desea guardar los cambios?",
@@ -761,7 +757,6 @@ public class Bloc extends javax.swing.JFrame {
     private javax.swing.JMenuItem copiar;
     private javax.swing.JMenuItem cortar;
     public javax.swing.JLabel currentposition;
-    private javax.swing.JMenuItem deshacer;
     private javax.swing.JMenu edicion;
     private javax.swing.JMenuItem eliminar;
     private javax.swing.Box.Filler filler1;
@@ -789,5 +784,10 @@ public class Bloc extends javax.swing.JFrame {
     private javax.swing.JMenu ver;
     private javax.swing.JMenuItem webproject;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }
